@@ -1,0 +1,161 @@
+
+.navbar {
+  font-family: Arial, sans-serif;
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Start Top bar styling */
+.topBar {
+  background-color: #634C9F;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 20px;
+  font-size: 14px;
+}
+
+.contactInfo span {
+  margin-right: 15px;
+}
+
+.socialIcons a {
+  margin-left: 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.socialIcons svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Main navigation bar styling */
+.mainNav {
+  background-color: white;
+  padding: 15px 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.navContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+/* Logo styling */
+.logo {
+  position: absolute;
+  left: 20px;
+}
+
+.logoImg {
+  width: 250px;
+  margin-right: 10px;
+}
+
+/* Navigation links styling */
+.navLinks {
+  display: flex;
+  align-items: center;
+}
+
+.navLinks ul {
+  list-style-type: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+.navLinks ul li {
+  display: inline;
+}
+
+.navLinks ul li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  padding: 5px 10px;
+}
+
+.navLinks ul li a:hover {
+  color: #634C9F;
+}
+
+/* Cart icon styling */
+.cartIcon {
+  position: absolute;
+  right: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.cartIcon svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Default styles */
+.hamburger {
+  display: none;
+}
+
+.navLinks {
+  display: flex;
+}
+
+/* Media query for responsiveness */
+@media (max-width: 859px) {
+  .hamburger {
+    display: block;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+  }
+
+  .navLinks {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px; /* Adjust based on your navbar height */
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border-top: 1px solid #ddd;
+  }
+
+  /* Show the navLinks when the menu is open */
+  .navLinks.show {
+    display: flex;
+  }
+
+  .navContainer {
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align items to the start */
+  }
+
+  .navLinks ul {
+    flex-direction: column; /* Stack links vertically */
+    width: 100%; /* Full width for links */
+  }
+
+  .navLinks ul li {
+    margin: 10px 0; /* Space between links */
+  }
+
+  .cartIcon {
+    position: absolute; /* Change position for mobile */
+    right: 70px;
+  }
+}
