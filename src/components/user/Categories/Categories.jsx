@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import styles from "./Categories.module.css"; // Import your CSS file
 
 export default function Categories() {
   const [categories, setCategories] = useState([]);
@@ -16,11 +17,11 @@ export default function Categories() {
   }, []);
 
   return (
-    <section className="categories">
+    <section className={styles.categories}>
       {categories.map((category) => (
-        <Link key={category._id} to={`/categoryDetails/${category._id}`}>
-          <div  className="category">
-            <img src={category.image.secure_url} />
+        <Link key={category._id} to={`/categoryDetails/${category._id}`} className={styles.categoryLink}>
+          <div className={styles.category}>
+            <img src={category.image.secure_url} alt={category.name} />
           </div>
         </Link>
       ))}

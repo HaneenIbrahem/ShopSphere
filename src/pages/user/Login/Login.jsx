@@ -19,14 +19,33 @@ export default function Login() {
   };
 
   const initialValuesRegister = {
-    username: "",
+    userName: "",
     email: "",
     password: "",
   };
 
+  // const validationSchemaLogin = Yup.object({
+  //   email: Yup.string()
+  //     .email("Invalid email format")
+  //     .required("Email address is required")
+  //     .min(5)
+  //     .max(50),
+  //   password: Yup.string().required("Password is required"),
+  // });
+  // const validationSchemaRegister = Yup.object({
+  //   username: Yup.string()
+  //     .required("Username is required")
+  //     .min(1, "Username must be at least 1 character long"),
+  //   email: Yup.string()
+  //     .email("Invalid email format")
+  //     .required("Email address is required")
+  //     .min(5)
+  //     .max(50),
+  //   password: Yup.string().required("Password is required"),
+  // });
   const getValidationSchema = (isRegistering) =>
     Yup.object({
-      username: isRegistering
+      userName: isRegistering
         ? Yup.string().required("Username is required").min(1)
         : null,
       email: Yup.string()
@@ -52,7 +71,7 @@ export default function Login() {
           localStorage.removeItem('rememberMe');
         }
   
-        toast.success("Login successful!");
+        toast.success("Login successful!", { autoClose: 1500 });
         navigate('/'); // Adjust based on your routing
       } catch (error) {
         if (error.response && error.response.data) {
@@ -61,17 +80,17 @@ export default function Login() {
             const fieldErrors = {};
             serverErrors.forEach((err) => {
               fieldErrors[err.param] = err.msg;
-              toast.error(`${err.param.charAt(0).toUpperCase() + err.param.slice(1)}: ${err.msg}`);
+              toast.error(`${err.param.charAt(0).toUpperCase() + err.param.slice(1)}: ${err.msg}`, { autoClose: 1500 });
             });
             setErrors(fieldErrors); 
           } else if (error.response.data.message) {
-            toast.error(`Error: ${error.response.data.message}`);
+            toast.error(`Error: ${error.response.data.message}`, { autoClose: 1500 });
           } else {
             toast.error("Login failed. Please try again.");
           }
         } else {
           console.error('Error during login:', error);
-          toast.error("An unexpected error occurred.");
+          toast.error("An unexpected error occurred.", { autoClose: 1500 });
         }
       } finally {
         setSubmitting(false); // Turn off loader
@@ -85,7 +104,7 @@ export default function Login() {
         values
       );
       console.log(data);
-      toast.success("Registration successful! Please log in.");
+      toast.success("Registration successful! Please log in.", { autoClose: 1500 });
       navigate("/login");
     } catch (error) {
       if (error.response && error.response.data) {
@@ -97,18 +116,18 @@ export default function Login() {
             toast.error(
               `${err.param.charAt(0).toUpperCase() + err.param.slice(1)}: ${
                 err.msg
-              }`
+              }`, { autoClose: 1500 }
             );
           });
           setErrors(fieldErrors); // show field-specific errors
         } else if (error.response.data.message) {
-          toast.error(`Error: ${error.response.data.message}`);
+          toast.error(`Error: ${error.response.data.message}`, { autoClose: 1500 });
         } else {
-          toast.error("Registration failed. Please try again.");
+          toast.error("Registration failed. Please try again.", { autoClose: 1500 });
         }
       } else {
         console.error("Error during registration:", error);
-        toast.error(`Error: ${error.response.data.message}`);
+        toast.error(`Error: ${error.response.data.message}`, { autoClose: 1500 });
       }
     } finally {
       setSubmitting(false); // Turn off loader
@@ -151,12 +170,12 @@ export default function Login() {
                     <label htmlFor="username">Username *</label>
                     <Field
                       type="text"
-                      id="username"
-                      name="username"
+                      id="userName"
+                      name="userName"
                       className={styles.inputField}
                     />
                     <ErrorMessage
-                      name="username"
+                      name="userName"
                       component="div"
                       className={styles.error}
                     />

@@ -1,0 +1,33 @@
+.categories {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+  
+  .category-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .category {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    transition: transform 0.3s ease;
+  }
+  
+  .category:hover {
+    transform: scale(1.05);
+  }
+  
+  .category img {
+    width: 120px;
+    height: auto; /* Adjust this if needed based on the image aspect ratio */
+    object-fit: cover;
+    border: none; /* Remove border styling */
+    padding: 0; /* Remove padding */
+  }
+  

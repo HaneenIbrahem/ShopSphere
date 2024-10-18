@@ -1,0 +1,81 @@
+.heroContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 85px auto 50px;
+    background-color: #e5ddec; /* Light lavender background */
+    padding: 40px;
+    border-radius: 10px;
+  }
+  
+  .textContainer {
+    max-width: 50%; /* Ensure text section is half the screen */
+  }
+  
+  .discountLabel {
+    background-color: #d1e7dd; /* Light green background */
+    color: #0f5132; /* Dark green text */
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+  
+  h1 {
+    color: #3b0e70; /* Dark purple for heading */
+    font-size: 2.5rem;
+    margin: 20px 0;
+  }
+  
+  p {
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  .priceContainer {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .shopButton {
+    background-color: #3b0e70; /* Pink button color */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 20px;
+    font-size: 1rem;
+  }
+  
+  .price {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .newPrice {
+    font-size: 1.5rem;
+    color: #d62828; /* Red color for the discounted price */
+  }
+  
+  .oldPrice {
+    font-size: 1rem;
+    color: #888;
+    text-decoration: line-through;
+  }
+  
+  .limitedOffer {
+    font-size: 0.9rem;
+    color: #888;
+    margin-top: 10px;
+  }
+  
+  .imageContainer {
+    max-width: 40%; /* Ensure image section is smaller */
+  }
+  
+  .imageContainer img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
