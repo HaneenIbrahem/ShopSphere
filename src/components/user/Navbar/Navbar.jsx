@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
+import {CartContext } from '../../../pages/user/Cart/CartContext';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { cartItems } = useContext(CartContext);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -162,7 +164,8 @@ export default function Navbar() {
                   stroke-width="1.5"
                   stroke-linecap="round"
                 />
-              </svg>
+              </svg><span>{cartItems.length}</span>
+              {/* {cartItems.length > 0 && <span className={styles.cartCount}>{cartItems.length}</span>} */}
             </Link>
           </div>
         </div>

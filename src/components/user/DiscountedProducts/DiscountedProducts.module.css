@@ -1,0 +1,83 @@
+.discountedProducts {
+    padding: 20px 100px;
+    background-color: #f2f2f2;
+  }
+  
+  .discountedProducts h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .productsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .productCard {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    position: relative;
+  }
+  
+  .productCard:hover {
+    transform: scale(1.05);
+  }
+  
+  .productCard img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .productCard h3 {
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .productCard p {
+    margin: 5px 0;
+  }
+  
+  /* Discount Badge in the top-right corner */
+  .discountBadge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #e74c3c; /* Red for the discount */
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 50px;
+    z-index: 1;
+  }
+  
+  /* New price style (after discount) */
+  .productCard .newPrice {
+    color: green;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  /* Old price style (before discount) */
+  .productCard .oldPrice {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 16px;
+    margin-right: 10px;
+  }
+  
+  /* Container for old and new prices */
+  .priceContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
+  

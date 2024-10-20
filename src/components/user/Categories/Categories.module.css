@@ -3,7 +3,7 @@
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
-    padding: 20px;
+    padding: 0 50px;
   }
   
   .category-link {

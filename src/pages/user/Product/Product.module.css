@@ -1,0 +1,148 @@
+.productDetails {
+    padding: 100px 100px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .productContainer {
+    display: flex;
+    gap: 40px;
+  }
+  
+  .imageGallery {
+    flex: 1;
+  }
+  
+  .mainImageContainer {
+    margin-bottom: 20px;
+  }
+  
+  .mainProductImage {
+    width: 400px;
+    height: auto;
+  }
+  
+  .thumbnailContainer {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .thumbnailImage {
+    width: 80px;
+    height: auto;
+    cursor: pointer;
+  }
+  
+  .productInfo {
+    flex: 1;
+  }
+  
+  .productName {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .priceSection {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .currentPrice {
+    font-size: 28px;
+    font-weight: bold;
+    color: #e74c3c;
+  }
+  
+  .oldPrice {
+    font-size: 18px;
+    text-decoration: line-through;
+    color: #7f8c8d;
+  }
+  
+  .productDescription {
+    margin: 20px 0;
+    font-size: 16px;
+  }
+
+  .toggleButton {
+    background-color: #634C9F; /* Main color of the project */
+    color: white; /* Text color */
+    border: none;
+    border-radius: 25px; /* Rounded corners */
+    padding: 8px 20px; /* Padding to make the button larger */
+    font-size: 14px; /* Slightly smaller font size */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+    margin-top: 10px; /* Ensure space between description and button */
+  margin-bottom: 20px; /* Space between the See More button and action buttons */
+  }
+  
+  .toggleButton:hover {
+    background-color: #523a82; /* Darker shade on hover */
+  }
+  
+  .toggleButton:focus {
+    outline: none; /* Remove default outline when focused */
+  }
+  
+  .actionButtons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .addToCartButton, .buyNowButton {
+    background-color: #2ecc71;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 16px;
+  }
+  
+  .addToCartButton:hover{
+    background-color: rgb(30, 135, 74);
+  }
+  .buyNowButton:hover {
+    background-color: #c84133
+  }
+  
+  .countdownTimer {
+    margin-bottom: 20px;
+  }
+  
+  .timerBoxes {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .timerBoxes span {
+    background-color: #f1c40f;
+    padding: 5px 10px;
+    font-weight: bold;
+  }
+  
+  
+  
+  .buyNowButton {
+    background-color: #e74c3c;
+  }
+  
+  .extraButtons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .wishlistButton, .shareButton, .compareButton {
+    background-color: transparent;
+    border: 1px solid #bdc3c7;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  .shareButton:hover{
+    background-color: #e2e9ef;
+  }

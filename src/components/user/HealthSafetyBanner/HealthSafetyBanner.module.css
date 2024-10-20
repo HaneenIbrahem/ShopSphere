@@ -1,0 +1,29 @@
+.banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FCEDE5; /* Light background color similar to your example */
+    padding: 20px 100px;
+    border-radius: 10px;
+  }
+  
+  .textContent {
+    flex: 1;
+  }
+  
+  .textContent h2 {
+    color: #e47911; /* Bold orange color for title */
+    font-size: 20px;
+    margin: 0;
+  }
+  
+  .textContent p {
+    color: #666;
+    font-size: 14px;
+  }
+  
+  .imageContent img {
+    width: 500px;
+    height: auto; /* Adjust image size */
+  }
+  
