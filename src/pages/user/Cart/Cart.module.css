@@ -1,0 +1,153 @@
+.cartContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 120px;
+}
+
+.cartTitle {
+  font-size: 2rem;
+  text-align: center;
+  color: #634C9F;
+  margin-bottom: 20px;
+}
+
+.emptyCartContainer {
+  text-align: center;
+  margin: 250px;
+}
+
+.emptyCartImage {
+  width: 200px; /* Adjust the size as needed */
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.goToProductsButton {
+  background-color: #634C9F; /* Your project's main color */
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.goToProductsButton:hover {
+  background-color: #523d88; /* Darker shade on hover */
+}
+
+.goToProductsButton:focus {
+  outline: none;
+}
+
+.goToProductsButton:active {
+  background-color: #412d70; /* Even darker shade when active */
+}
+
+
+.cartItems {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.cartItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.productImage {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.itemDetails {
+  text-align: center;
+}
+
+.productName {
+  font-size: 1.25rem;
+  color: #333;
+  margin: 10px 0;
+}
+
+.productPrice {
+  font-size: 1.1rem;
+  color: #ff5722;
+  margin-bottom: 10px;
+}
+
+.totalPrice {
+  font-size: 1.1rem;
+  color: #4caf50; /* Green color for total price */
+  margin-top: 5px;
+}
+
+.quantityControls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.decreaseButton, .increaseButton {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin: 0 10px;
+  transition: all 0.2s;
+}
+
+.decreaseButton:hover, .increaseButton:hover {
+  background-color: #e0e0e0;
+}
+
+.productQuantity {
+  font-size: 1rem;
+  margin: 0 10px;
+}
+
+.removeButton {
+  background-color: #f44336;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.removeButton:hover {
+  background-color: #d32f2f;
+}
+
+.clearCartButton {
+  background-color: #f44336;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: all 0.2s;
+}
+
+.clearCartButton:hover {
+  background-color: #d32f2f;
+}
+
+.emptyCart {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #777;
+  margin-top: 50px;
+}

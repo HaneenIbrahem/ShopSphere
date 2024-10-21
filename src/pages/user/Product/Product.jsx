@@ -3,7 +3,8 @@ import React, {useContext , useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Loader from '../../../components/user/Loader/Loader'; // Import the Loader component
 import styles from './Product.module.css'; // Import the CSS module for styling
-import { CartContext } from '../Cart/CartContext';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 export default function Product() {
@@ -12,47 +13,88 @@ export default function Product() {
   const [mainImage, setMainImage] = useState('');
   const [loading, setLoading] = useState(true);
   const [showFullDescription, setShowFullDescription] = useState(false); // State to toggle description
-  const { addToCart } = useContext(CartContext);
-  const [quantity, setQuantity] = useState(1);
   const { productId } = useParams();
 
   const handleAddToCart = async () => {
-    try {
-      const response = await axios.patch("http://localhost:3000/cart/incraseQuantity", {
-        productId: product.id,
-      }, {
-        headers: {
-          Authorization: `Tariq__${localStorage.getItem("authToken")}`, 
-        },
-      });
+    const authToken = localStorage.getItem("authToken");
 
-      if (response.status === 200) {
-        addToCart(product); 
-      } else {
-        console.error("Failed to add product to cart, status:", response.status);
+  if (!authToken) {
+    console.error("User is not authenticated");
+    return;
+  }
+
+  if (!product || !product.id) {
+    console.error("Invalid product or product ID");
+    return;
+  }
+
+  try {
+    const response = await axios.post(
+      "https://ecommerce-node4.onrender.com/cart",
+      { productId: product.id },
+      {
+        headers: {
+          Authorization: `Tariq__${authToken}`, // Ensure authToken format is correct
+        },
       }
-    } catch (error) {
-      console.error("Error adding product to cart", error);
+    );
+
+    // Check for both 200 and 201 status codes
+    if (response.status === 200 || response.status === 201) {
+      toast.success("Item added successful!", { autoClose: 1500 });
+      const existingCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+  
+
+      // Add the new item to the cart
+      existingCartItems.push(product);
+
+      // Save the updated cart items back to local storage
+      localStorage.setItem("cartItems", JSON.stringify(existingCartItems));
+
+      window.dispatchEvent(new Event("storage"));
+    } else {
+      console.error(`Failed to add product to cart, status: ${response.status}`);
     }
+  } catch (error) {
+    console.error("Error adding product to cart:", error);
+  }
+    // try {
+    //   const response = await axios.post("https://ecommerce-node4.onrender.com/cart", {
+    //     productId: product.id,
+    //   }, {
+    //     headers: {
+    //       Authorization: `Tariq__${localStorage.getItem("authToken")}`, 
+    //     },
+    //   });
+
+    //   if (response.status === 200) {
+    //     addToCart(product); 
+    //   } else {
+    //     console.error("Failed to add product to cart, status:", response.status);
+    //   }
+    // } catch (error) {
+    //   console.error("Error adding product to cart", error);
+    // }
   };
 
-  const handleDecreaseQuantity = async () => {
-    try {
-      const response = await axios.patch("http://localhost:5173/cart/decraseQuantity", {
-        productId: product.id,
-      }, {
-        headers: {
-          Authorization: localStorage.getItem("authToken"),
-        },
-      });
+  // const handleDecreaseQuantity = async () => {
+  //   try {
+  //     const response = await axios.patch("http://localhost:5173/cart/decraseQuantity", {
+  //       productId: product.id,
+  //     }, {
+  //       headers: {
+  //         Authorization: localStorage.getItem("authToken"),
+  //       },
+  //     });
 
-      if (response.status === 200) {
-        setQuantity(prevQuantity => Math.max(prevQuantity - 1, 1)); // Decrease quantity but not below 1
-      }
-    } catch (error) {
-      console.error("Error decreasing quantity", error);
-    }
-  };
+  //     if (response.status === 200) {
+  //       setQuantity(prevQuantity => Math.max(prevQuantity - 1, 1)); // Decrease quantity but not below 1
+  //     }
+  //   } catch (error) {
+  //     console.error("Error decreasing quantity", error);
+  //   }
+  // };
 
   const getProducts = async () => {
     setLoading(true);
@@ -148,11 +190,11 @@ export default function Product() {
           )}
 
           {/* Quantity Control */}
-          <div className={styles.quantityControl}>
+          {/* <div className={styles.quantityControl}>
             <button onClick={handleDecreaseQuantity} className={styles.decreaseQuantityButton}>-</button>
             <span className={styles.quantity}>{quantity}</span>
             <button onClick={() => setQuantity(prevQuantity => prevQuantity + 1)} className={styles.increaseQuantityButton}>+</button>
-          </div>
+          </div> */}
 
           <div className={styles.actionButtons}>
             <button onClick={handleAddToCart} className={styles.addToCartButton}>Add to Cart</button>

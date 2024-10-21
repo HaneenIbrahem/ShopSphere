@@ -1,15 +1,31 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
-import {CartContext } from '../../../pages/user/Cart/CartContext';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { cartItems } = useContext(CartContext);
+  const [cartItemCount, setCartItemCount] = useState(0);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  useEffect(() => {
+    const updateCartCount = () => {
+      const cartItems = localStorage.getItem("cartItems");
+      setCartItemCount(cartItems ? JSON.parse(cartItems).length : 0);
+    };
+
+    // Initial count
+    updateCartCount();
+
+    // Listen for changes in local storage
+    window.addEventListener("storage", updateCartCount);
+
+    return () => {
+      window.removeEventListener("storage", updateCartCount);
+    };
+  }, []);
 
   return (
     <header className={`${styles.navbar}`}>
@@ -164,7 +180,13 @@ export default function Navbar() {
                   stroke-width="1.5"
                   stroke-linecap="round"
                 />
-              </svg><span>{cartItems.length}</span>
+              </svg><span>{cartItemCount}</span>
+              {/* <span>{localStorage.getItem("cartItems") 
+    ? JSON.parse(localStorage.getItem("cartItems")).length 
+    : 0}</span> */}
+              {/* <span>{cartItems.length}</span> */}
+              {/* <span>{JSON.parse(localStorage.getItem("cartItems")).length}</span> */}
+              {/* <span>{cartItems.length}</span> */}
               {/* {cartItems.length > 0 && <span className={styles.cartCount}>{cartItems.length}</span>} */}
             </Link>
           </div>
