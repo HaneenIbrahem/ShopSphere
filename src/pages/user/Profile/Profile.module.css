@@ -1,0 +1,27 @@
+.profileContainer {
+    max-width: 600px;
+    margin: 130px auto;
+    padding: 100px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .title {
+    text-align: center;
+    color: #634C9F; /* Your main color */
+  }
+  
+  .profileInfo {
+    margin-top: 20px;
+  }
+  
+  .profileInfo p {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .profileInfo strong {
+    color: #634C9F;
+  }
+  

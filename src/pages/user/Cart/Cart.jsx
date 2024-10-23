@@ -154,10 +154,21 @@ export default function Cart() {
 
   return (
     <div className={styles.cartContainer}>
+      <h1 className={styles.cartTitle}>Shopping Cart</h1>
+      <div className={styles.orderButtonContainer}>
         <button onClick={clearCart} className={styles.clearCartButton}>
         <FaTrash/> Clear Cart
       </button>
-      <h1 className={styles.cartTitle}>Shopping Cart</h1>
+      {/* Add the Order button here */}
+      
+        <button
+          onClick={() => navigate('/order')} // Navigate to the order page
+          className={styles.orderButton}
+        >
+          Proceed to Order
+        </button>
+      </div>
+      {/* <h1 className={styles.cartTitle}>Shopping Cart</h1> */}
       <div className={styles.cartItems}>
         {cartItems.map((item) => {
           const { details, quantity, productId } = item; // Destructure details, quantity, and productId

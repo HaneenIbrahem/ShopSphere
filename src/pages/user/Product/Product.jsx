@@ -12,8 +12,102 @@ export default function Product() {
   const [productImages, setProductImages] = useState([]);
   const [mainImage, setMainImage] = useState('');
   const [loading, setLoading] = useState(true);
-  const [showFullDescription, setShowFullDescription] = useState(false); // State to toggle description
+  const [showFullDescription, setShowFullDescription] = useState(false); 
+  const [comment, setComment] = useState(""); // New state for comment
+  const [rating, setRating] = useState(1); // New state for rating (default to 1)
   const { productId } = useParams();
+
+  console.log(`productId ${productId}`)
+
+  
+
+  const handleAddReview = async () => {
+    if (!comment.trim()) {
+      toast.error("Comment cannot be empty", { autoClose: 1500 });
+      return;
+    }
+
+    const authToken = localStorage.getItem("authToken");
+
+    if (!authToken) {
+      console.error("User is not authenticated");
+      return;
+    }
+
+    try {
+      const ordersResponse = await axios.get(
+        'https://ecommerce-node4.onrender.com/order', // API to get the user's orders
+        {
+          headers: {
+            Authorization: `Tariq__${authToken}`, // Ensure the token is properly attached
+          },
+        }
+      );
+      // Check if the product exists in any of the user's orders
+    const userOrders = ordersResponse.data.orders; // Assuming the API returns an array of orders
+    console.log(userOrders)
+    const hasOrderedProduct = userOrders.some(order =>
+      order.products.some(product => product.id === productId),
+      console.log(`product.id ${product.id}`)
+    );
+
+    
+
+    if (!hasOrderedProduct) {
+      toast.error("You can only review products you have ordered", { autoClose: 1500 });
+      return;
+    }
+
+    // Step 2: Submit the review if the product was ordered
+    const reviewResponse = await axios.post(
+      `https://ecommerce-node4.onrender.com/products/${productId}/review`,
+      {
+        comment: comment,
+        rating: rating,
+      },
+      {
+        headers: {
+          Authorization: `Tariq__${authToken}`, 
+        },
+      }
+    );
+
+    if (reviewResponse.status === 200 || reviewResponse.status === 201) {
+      toast.success("Review submitted successfully!", { autoClose: 1500 });
+      setComment(""); // Clear the comment field after submission
+      setRating(1); // Reset rating
+    } else {
+      console.error(`Failed to submit review, status: ${reviewResponse.status}`);
+    }
+  } catch (error) {
+    console.error("Error verifying order or submitting review:", error);
+  }
+
+    // try {
+    //   const response = await axios.post(
+    //     `https://ecommerce-node4.onrender.com/products/${productId}/review`,
+    //     {
+    //       comment: comment,
+    //       rating: rating
+    //     },
+    //     {
+    //       headers: {
+    //         Authorization: `Tariq__${localStorage.getItem("authToken")}`, 
+    //       },
+    //     }
+    //   );
+
+    //   if (response.status === 200 || response.status === 201) {
+    //     toast.success("Review submitted successfully!", { autoClose: 1500 });
+    //     setComment(""); // Clear the comment field after submission
+    //     setRating(1); // Reset rating
+    //   } else {
+    //     console.error(`Failed to submit review, status: ${response.status}`);
+    //   }
+    // } catch (error) {
+    //   console.error("Error submitting review:", error);
+    // }
+  };
 
   const handleAddToCart = async () => {
     const authToken = localStorage.getItem("authToken");
@@ -207,6 +301,35 @@ export default function Product() {
             <button className={styles.shareButton}>Share</button>
             <button className={styles.compareButton}>Compare</button>
           </div> */}
+
+          {/* Review Form */}
+        <div className={styles.reviewSection}>
+          <h3>Leave a Review</h3>
+          <textarea
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            placeholder="Leave your comment here"
+            className={styles.reviewTextarea}
+          />
+          <div className={styles.ratingSection}>
+            <label htmlFor="rating">Rating:</label>
+            <select
+              id="rating"
+              value={rating}
+              onChange={(e) => setRating(e.target.value)}
+              className={styles.ratingSelect}
+            >
+              <option value={1}>1</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+              <option value={4}>4</option>
+              <option value={5}>5</option>
+            </select>
+          </div>
+          <button onClick={handleAddReview} className={styles.submitReviewButton}>
+            Submit Review
+          </button>
+        </div>
         </div>
       </div>
     </section>
