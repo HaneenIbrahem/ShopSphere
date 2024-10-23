@@ -46,12 +46,19 @@ export default function Product() {
       // Check if the product exists in any of the user's orders
     const userOrders = ordersResponse.data.orders; // Assuming the API returns an array of orders
     console.log(userOrders)
-    const hasOrderedProduct = userOrders.some(order =>
-      order.products.some(product => product.id === productId),
-      console.log(`product.id ${product.id}`)
-    );
+    // const hasOrderedProduct = userOrders.some(order =>
+    //   order.products.some(product => product.id === productId),
+    //   console.log(`product.id ${product.id}`)
+    // );
 
-    
+    const hasOrderedProduct = userOrders.some(order =>
+      order.products.some(p => {
+        const productIdValue = p.productId._id; 
+        console.log("Product object:", p); 
+        console.log(`Comparing product ID: ${productIdValue} with productId: ${productId}`);
+        return productIdValue === productId; 
+      })
+    );
 
     if (!hasOrderedProduct) {
       toast.error("You can only review products you have ordered", { autoClose: 1500 });

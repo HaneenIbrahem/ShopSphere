@@ -1,0 +1,91 @@
+.contactPage {
+    padding: 140px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  .headerSection {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  
+  .headerSection h1 {
+    font-size: 36px;
+    color: #333;
+  }
+  
+  .headerSection p {
+    font-size: 18px;
+    color: #666;
+  }
+  
+  .officesSection {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 40px;
+  }
+  
+  .office {
+    text-align: left;
+    width: 45%;
+  }
+  
+  .office h3 {
+    font-size: 20px;
+    color: #634C9F;
+  }
+  
+  .office p {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .formSection {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .inputRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .inputGroup {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .inputField {
+    width: 85%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .textArea {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  .submitButton {
+    background-color: #634C9F;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
