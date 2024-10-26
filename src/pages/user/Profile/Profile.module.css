@@ -1,27 +1,38 @@
-.profileContainer {
-    max-width: 600px;
-    margin: 130px auto;
-    padding: 100px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .title {
-    text-align: center;
-    color: #634C9F; /* Your main color */
-  }
-  
-  .profileInfo {
-    margin-top: 20px;
-  }
-  
-  .profileInfo p {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  .profileInfo strong {
-    color: #634C9F;
-  }
-  
+.profileDropdownContainer {
+  width: 250px;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  color: #333;
+  text-align: left;
+  z-index: 1000; /* Ensures dropdown appears above other elements */
+}
+
+.dropdownTitle {
+  font-size: 18px;
+  font-weight: bold;
+  color: #634C9F;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.dropdownProfileInfo p {
+  font-size: 14px;
+  margin: 5px 0;
+  line-height: 1.4;
+}
+
+.dropdownProfileInfo strong {
+  color: #634C9F; /* Main color for highlights */
+}
+
+.profileDropdownContainer:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.dropdownProfileInfo p:hover {
+  background-color: #f4f4f4; /* Light hover effect */
+  border-radius: 4px;
+  padding: 2px 4px;
+}

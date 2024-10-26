@@ -1,0 +1,32 @@
+.testimonialsSection {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 40px 20px;
+  }
+  
+  .testimonialsSection h2 {
+    color: #634C9F; /* Main color */
+    margin-bottom: 20px;
+  }
+  
+  .testimonial {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+  }
+  
+  .testimonial p {
+    font-style: italic;
+    color: #333;
+  }
+  
+  .testimonial span {
+    display: block;
+    margin-top: 10px;
+    color: #634C9F;
+    font-weight: bold;
+  }
+  

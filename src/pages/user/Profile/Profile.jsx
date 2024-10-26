@@ -16,7 +16,6 @@ const Profile = () => {
             Authorization: `Tariq__${localStorage.getItem("authToken")}`
           }
         });
-        console.log(response.data.user)
         setProfile(response.data.user);
       } catch (error) {
         setError('Failed to load profile');
@@ -33,7 +32,7 @@ const Profile = () => {
 
   return (
     <div className={styles.profileContainer}>
-      <h1 className={styles.title}>User Profile</h1>
+      <h2 className={styles.title}>User Profile</h2>
       <div className={styles.profileInfo}>
         <p><strong>Name:</strong> {profile?.userName}</p>
         <p><strong>Email:</strong> {profile?.email}</p>

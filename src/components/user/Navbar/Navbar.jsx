@@ -1,18 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef  } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
+import Profile from "../../../pages/user/Profile/Profile";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [cartItemCount, setCartItemCount] = useState(0);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
 
   const navigate = useNavigate();
+  const profileRef = useRef(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const toggleProfileDropdown = () => {
+    setIsProfileDropdownOpen(!isProfileDropdownOpen);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setIsProfileDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   // Check if a token exists in localStorage to set authentication status
   useEffect(() => {
@@ -171,45 +191,6 @@ export default function Navbar() {
               </li>
               {isAuthenticated ? (
                 <>
-                  <li>
-                    <Link to="/profile">Profile</Link>
-                  </li>
-                  <li>
-                    {/* <button onClick={handleLogout}> */}
-                      <svg
-                      onClick={handleLogout}
-                      width="30px"
-                      height="30px"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      transform="rotate(180)"
-                    >
-                      <g id="SVGRepo_bgCarrier" stroke-width="0" />
-
-                      <g
-                        id="SVGRepo_tracerCarrier"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-
-                      <g id="SVGRepo_iconCarrier">
-                        {" "}
-                        <path
-                          opacity="0.5"
-                          d="M15.9998 2L14.9998 2C12.1714 2 10.7576 2.00023 9.87891 2.87891C9.00023 3.75759 9.00023 5.1718 9.00023 8.00023L9.00023 16.0002C9.00023 18.8287 9.00023 20.2429 9.87891 21.1215C10.7574 22 12.1706 22 14.9976 22L14.9998 22L15.9998 22C18.8282 22 20.2424 22 21.1211 21.1213C21.9998 20.2426 21.9998 18.8284 21.9998 16L21.9998 8L21.9998 7.99998C21.9998 5.17157 21.9998 3.75736 21.1211 2.87868C20.2424 2 18.8282 2 15.9998 2Z"
-                          fill="#1C274C"
-                        />{" "}
-                        <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M15.75 12C15.75 11.5858 15.4142 11.25 15 11.25L4.02744 11.25L5.98809 9.56943C6.30259 9.29986 6.33901 8.82639 6.06944 8.51189C5.79988 8.1974 5.3264 8.16098 5.01191 8.43054L1.51191 11.4305C1.34567 11.573 1.25 11.781 1.25 12C1.25 12.2189 1.34567 12.4269 1.51191 12.5694L5.01191 15.5694C5.3264 15.839 5.79988 15.8026 6.06944 15.4881C6.33901 15.1736 6.30259 14.7001 5.98809 14.4305L4.02744 12.75L15 12.75C15.4142 12.75 15.75 12.4142 15.75 12Z"
-                          fill="#1C274C"
-                        />{" "}
-                      </g>
-                    </svg>
-                    {/* </button> */}
-                  </li>
                 </>
               ) : (
                 <>
@@ -223,8 +204,184 @@ export default function Navbar() {
               )}
             </ul>
           </div>
-          {/* Cart Icons */}
+
+          <div className={styles.profileIconWrapper}>
+            <button
+              onClick={toggleProfileDropdown}
+              className={styles.profileIcon}
+            >
+              {/* Profile Icon SVG or image */}
+              <svg
+                width="30px"
+                height="30px"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0" />
+
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+
+                <g id="SVGRepo_iconCarrier">
+                  {" "}
+                  <g clip-path="url(#clip0_15_82)">
+                    {" "}
+                    <rect width="24" height="24" fill="white" />{" "}
+                    <g filter="url(#filter0_d_15_82)">
+                      {" "}
+                      <path
+                        d="M14.3365 12.3466L14.0765 11.9195C13.9082 12.022 13.8158 12.2137 13.8405 12.4092C13.8651 12.6046 14.0022 12.7674 14.1907 12.8249L14.3365 12.3466ZM9.6634 12.3466L9.80923 12.8249C9.99769 12.7674 10.1348 12.6046 10.1595 12.4092C10.1841 12.2137 10.0917 12.022 9.92339 11.9195L9.6634 12.3466ZM4.06161 19.002L3.56544 18.9402L4.06161 19.002ZM19.9383 19.002L20.4345 18.9402L19.9383 19.002ZM16 8.5C16 9.94799 15.2309 11.2168 14.0765 11.9195L14.5965 12.7737C16.0365 11.8971 17 10.3113 17 8.5H16ZM12 4.5C14.2091 4.5 16 6.29086 16 8.5H17C17 5.73858 14.7614 3.5 12 3.5V4.5ZM7.99996 8.5C7.99996 6.29086 9.79082 4.5 12 4.5V3.5C9.23854 3.5 6.99996 5.73858 6.99996 8.5H7.99996ZM9.92339 11.9195C8.76904 11.2168 7.99996 9.948 7.99996 8.5H6.99996C6.99996 10.3113 7.96342 11.8971 9.40342 12.7737L9.92339 11.9195ZM9.51758 11.8683C6.36083 12.8309 3.98356 15.5804 3.56544 18.9402L4.55778 19.0637C4.92638 16.1018 7.02381 13.6742 9.80923 12.8249L9.51758 11.8683ZM3.56544 18.9402C3.45493 19.8282 4.19055 20.5 4.99996 20.5V19.5C4.70481 19.5 4.53188 19.2719 4.55778 19.0637L3.56544 18.9402ZM4.99996 20.5H19V19.5H4.99996V20.5ZM19 20.5C19.8094 20.5 20.545 19.8282 20.4345 18.9402L19.4421 19.0637C19.468 19.2719 19.2951 19.5 19 19.5V20.5ZM20.4345 18.9402C20.0164 15.5804 17.6391 12.8309 14.4823 11.8683L14.1907 12.8249C16.9761 13.6742 19.0735 16.1018 19.4421 19.0637L20.4345 18.9402Z"
+                        fill="#000000"
+                      />{" "}
+                    </g>{" "}
+                  </g>{" "}
+                  <defs>
+                    {" "}
+                    <filter
+                      id="filter0_d_15_82"
+                      x="2.55444"
+                      y="3.5"
+                      width="18.8911"
+                      height="19"
+                      filterUnits="userSpaceOnUse"
+                      color-interpolation-filters="sRGB"
+                    >
+                      {" "}
+                      <feFlood
+                        flood-opacity="0"
+                        result="BackgroundImageFix"
+                      />{" "}
+                      <feColorMatrix
+                        in="SourceAlpha"
+                        type="matrix"
+                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                        result="hardAlpha"
+                      />{" "}
+                      <feOffset dy="1" /> <feGaussianBlur stdDeviation="0.5" />{" "}
+                      <feColorMatrix
+                        type="matrix"
+                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"
+                      />{" "}
+                      <feBlend
+                        mode="normal"
+                        in2="BackgroundImageFix"
+                        result="effect1_dropShadow_15_82"
+                      />{" "}
+                      <feBlend
+                        mode="normal"
+                        in="SourceGraphic"
+                        in2="effect1_dropShadow_15_82"
+                        result="shape"
+                      />{" "}
+                    </filter>{" "}
+                    <clipPath id="clip0_15_82">
+                      {" "}
+                      <rect width="24" height="24" fill="white" />{" "}
+                    </clipPath>{" "}
+                  </defs>{" "}
+                </g>
+              </svg>
+            </button>
+
+            {isProfileDropdownOpen && (
+        <div ref={profileRef} className={styles.dropdownMenu}>
+          {!isAuthenticated ? (
+            <Link to="/login" className={styles.dropdownItem}>
+              Login/Sign up
+            </Link>
+          ) : (
+            <>
+            <Profile />
+            <span onClick={handleLogout} className={styles.dropdownItem}>
+              Logout
+            </span>
+            </>
+          )}
+        </div>
+      )}
+          </div>
           <div className={`${styles.cartIcon}`}>
+            {/* <Link to="/profile">
+                <svg
+                  width="30px"
+                  height="30px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g id="SVGRepo_bgCarrier" stroke-width="0" />
+
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+
+                  <g id="SVGRepo_iconCarrier">
+                    {" "}
+                    <g clip-path="url(#clip0_15_82)">
+                      {" "}
+                      <rect width="24" height="24" fill="white" />{" "}
+                      <g filter="url(#filter0_d_15_82)">
+                        {" "}
+                        <path
+                          d="M14.3365 12.3466L14.0765 11.9195C13.9082 12.022 13.8158 12.2137 13.8405 12.4092C13.8651 12.6046 14.0022 12.7674 14.1907 12.8249L14.3365 12.3466ZM9.6634 12.3466L9.80923 12.8249C9.99769 12.7674 10.1348 12.6046 10.1595 12.4092C10.1841 12.2137 10.0917 12.022 9.92339 11.9195L9.6634 12.3466ZM4.06161 19.002L3.56544 18.9402L4.06161 19.002ZM19.9383 19.002L20.4345 18.9402L19.9383 19.002ZM16 8.5C16 9.94799 15.2309 11.2168 14.0765 11.9195L14.5965 12.7737C16.0365 11.8971 17 10.3113 17 8.5H16ZM12 4.5C14.2091 4.5 16 6.29086 16 8.5H17C17 5.73858 14.7614 3.5 12 3.5V4.5ZM7.99996 8.5C7.99996 6.29086 9.79082 4.5 12 4.5V3.5C9.23854 3.5 6.99996 5.73858 6.99996 8.5H7.99996ZM9.92339 11.9195C8.76904 11.2168 7.99996 9.948 7.99996 8.5H6.99996C6.99996 10.3113 7.96342 11.8971 9.40342 12.7737L9.92339 11.9195ZM9.51758 11.8683C6.36083 12.8309 3.98356 15.5804 3.56544 18.9402L4.55778 19.0637C4.92638 16.1018 7.02381 13.6742 9.80923 12.8249L9.51758 11.8683ZM3.56544 18.9402C3.45493 19.8282 4.19055 20.5 4.99996 20.5V19.5C4.70481 19.5 4.53188 19.2719 4.55778 19.0637L3.56544 18.9402ZM4.99996 20.5H19V19.5H4.99996V20.5ZM19 20.5C19.8094 20.5 20.545 19.8282 20.4345 18.9402L19.4421 19.0637C19.468 19.2719 19.2951 19.5 19 19.5V20.5ZM20.4345 18.9402C20.0164 15.5804 17.6391 12.8309 14.4823 11.8683L14.1907 12.8249C16.9761 13.6742 19.0735 16.1018 19.4421 19.0637L20.4345 18.9402Z"
+                          fill="#000000"
+                        />{" "}
+                      </g>{" "}
+                    </g>{" "}
+                    <defs>
+                      {" "}
+                      <filter
+                        id="filter0_d_15_82"
+                        x="2.55444"
+                        y="3.5"
+                        width="18.8911"
+                        height="19"
+                        filterUnits="userSpaceOnUse"
+                        color-interpolation-filters="sRGB"
+                      >
+                        {" "}
+                        <feFlood
+                          flood-opacity="0"
+                          result="BackgroundImageFix"
+                        />{" "}
+                        <feColorMatrix
+                          in="SourceAlpha"
+                          type="matrix"
+                          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                          result="hardAlpha"
+                        />{" "}
+                        <feOffset dy="1" />{" "}
+                        <feGaussianBlur stdDeviation="0.5" />{" "}
+                        <feColorMatrix
+                          type="matrix"
+                          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"
+                        />{" "}
+                        <feBlend
+                          mode="normal"
+                          in2="BackgroundImageFix"
+                          result="effect1_dropShadow_15_82"
+                        />{" "}
+                        <feBlend
+                          mode="normal"
+                          in="SourceGraphic"
+                          in2="effect1_dropShadow_15_82"
+                          result="shape"
+                        />{" "}
+                      </filter>{" "}
+                      <clipPath id="clip0_15_82">
+                        {" "}
+                        <rect width="24" height="24" fill="white" />{" "}
+                      </clipPath>{" "}
+                    </defs>{" "}
+                  </g>
+                </svg>
+              </Link> */}
             <Link to="/cart">
               <svg
                 width="800px"
@@ -251,13 +408,7 @@ export default function Navbar() {
                 />
               </svg>
               <span className={styles.cartCount}>{cartItemCount}</span>
-              {/* <span>{localStorage.getItem("cartItems") 
-    ? JSON.parse(localStorage.getItem("cartItems")).length 
-    : 0}</span> */}
-              {/* <span>{cartItems.length}</span> */}
-              {/* <span>{JSON.parse(localStorage.getItem("cartItems")).length}</span> */}
-              {/* <span>{cartItems.length}</span> */}
-              {/* {cartItems.length > 0 && <span className={styles.cartCount}>{cartItems.length}</span>} */}
+              
             </Link>
           </div>
         </div>

@@ -96,7 +96,20 @@
   right: 20px;
   display: flex;
   align-items: center;
+  margin-left: 40px;
 }
+
+.profileIcon {
+  position: absolute;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  margin-right: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 
 .cartIcon svg {
   width: 24px;
@@ -172,4 +185,34 @@
     position: absolute; /* Change position for mobile */
     right: 70px;
   }
+}
+
+.profileIconWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%; /* Positions dropdown below the profile icon */
+  right: 0; /* Aligns dropdown to the right */
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  min-width: 150px;
+  padding: 10px;
+  z-index: 1000; /* Ensures dropdown is on top */
+}
+
+.dropdownItem {
+  display: block;
+  padding: 8px 12px;
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dropdownItem:hover {
+  background-color: #f0f0f0;
 }
