@@ -1,0 +1,83 @@
+.featuredProducts {
+    padding: 120px;
+    background-color: #fff;
+  }
+  
+  .featuredProducts h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .productsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .productCard {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .productCard:hover {
+    transform: scale(1.05);
+  }
+  
+  .productCard img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .productCard h3 {
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .productCard p {
+    margin: 5px 0;
+  }
+  
+  .productCard .price {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .productCard .discount {
+    color: red;
+  }
+
+  .addToCart{
+    background-color: #634C9F; /* Main color */
+  color: #fff; /* Text color */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 20px; /* Vertical and horizontal padding */
+  margin: 10px;
+  font-size: 12px; /* Font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transition effects */
+  }
+  .addToCart:hover {
+    background-color: #4e3a7e; /* Darker shade on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+  }
+  .addToCart:focus {
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 0 2px rgba(100, 100, 100, 0.5); /* Add focus outline */
+  }
+
+  .strikethrough {
+    text-decoration: line-through;
+    color: red;
+    margin-right: 8px;
+}
+.discountedPrice {
+    font-weight: bold;
+    color: green;
+}

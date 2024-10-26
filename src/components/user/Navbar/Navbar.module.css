@@ -150,6 +150,13 @@
     position: absolute;
     right: 20px;
   }
+  .cartIcon {
+    margin-left: 80px;
+  }
+  
+  .profileIcon {
+    margin-right: 80px;
+  }
 
   .navLinks {
     display: none;

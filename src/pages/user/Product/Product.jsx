@@ -160,42 +160,7 @@ export default function Product() {
   } catch (error) {
     console.error("Error adding product to cart:", error);
   }
-    // try {
-    //   const response = await axios.post("https://ecommerce-node4.onrender.com/cart", {
-    //     productId: product.id,
-    //   }, {
-    //     headers: {
-    //       Authorization: `Tariq__${localStorage.getItem("authToken")}`, 
-    //     },
-    //   });
-
-    //   if (response.status === 200) {
-    //     addToCart(product); 
-    //   } else {
-    //     console.error("Failed to add product to cart, status:", response.status);
-    //   }
-    // } catch (error) {
-    //   console.error("Error adding product to cart", error);
-    // }
   };
-
-  // const handleDecreaseQuantity = async () => {
-  //   try {
-  //     const response = await axios.patch("http://localhost:5173/cart/decraseQuantity", {
-  //       productId: product.id,
-  //     }, {
-  //       headers: {
-  //         Authorization: localStorage.getItem("authToken"),
-  //       },
-  //     });
-
-  //     if (response.status === 200) {
-  //       setQuantity(prevQuantity => Math.max(prevQuantity - 1, 1)); // Decrease quantity but not below 1
-  //     }
-  //   } catch (error) {
-  //     console.error("Error decreasing quantity", error);
-  //   }
-  // };
 
   const getProducts = async () => {
     setLoading(true);

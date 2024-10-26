@@ -14,7 +14,8 @@ export default function Products() {
         "https://ecommerce-node4.onrender.com/products?page=1&limit=10"
       );
       const nonDiscountedProducts = data.products.filter(product => product.discount === 0);
-      setProducts(nonDiscountedProducts);
+      const fiveProducts = nonDiscountedProducts.slice(0, 12);
+      setProducts(fiveProducts);
       setLoading(false); // Set loading to false after data is fetched
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -28,7 +29,7 @@ export default function Products() {
 
   return (
     <section className={styles.featuredProducts}>
-      <h2>All Products</h2>
+      <h2>Popular Products</h2>
       <div className={styles.productsGrid}>
         {loading ? (
           <Loader /> // Show Loader component when loading
@@ -46,6 +47,9 @@ export default function Products() {
           <p>No products available.</p>
         )}
       </div>
+      <Link to="/allProducts" className={styles.seeAll}>
+      See All
+    </Link>
     </section>
   );
 }

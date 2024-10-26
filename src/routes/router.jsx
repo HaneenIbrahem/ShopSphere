@@ -11,6 +11,8 @@ import ForgotPassword from "../pages/user/ForgotPassword/ForgotPassword"
 import Cart from "../pages/user/Cart/Cart";
 import Profile from "../pages/user/Profile/Profile";
 import Order from "../pages/user/Order/Order";
+import AllDiscountedProducts from "../pages/user/AllDiscountedProducts/AllDiscountedProducts";
+import AllProducts from "../pages/user/AllProducts/AllProducts";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +63,14 @@ const router = createBrowserRouter([
         path: "/order",
         element: <Order />
       },
+      {
+        path: "/allDiscountedProducts",
+        element: < AllDiscountedProducts/>
+      },
+      {
+        path: "/allProducts",
+        element: < AllProducts/>
+      }
     ],
   },
 ]);

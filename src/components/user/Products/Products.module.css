@@ -1,6 +1,6 @@
 .featuredProducts {
     padding: 20px 100px;
-    background-color: #f2f2f2;
+    background-color: #fff;
   }
   
   .featuredProducts h2 {
@@ -50,5 +50,15 @@
   
   .productCard .discount {
     color: red;
+  }
+
+  .seeAll {
+    font-size: 20px;
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    color: #634C9F; /* Or any color you prefer */
+    text-decoration: none;
   }
   

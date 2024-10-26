@@ -143,7 +143,7 @@ export default function Cart() {
         <img src={"src/assets/imgs/emptyCart.jpg"} alt="Empty Cart" className={styles.emptyCartImage} />
         <p>Your cart is empty!</p>
         <button 
-          onClick={() => navigate('/products')} // Navigate to products page
+          onClick={() => navigate('/allProducts')} // Navigate to products page
           className={styles.goToProductsButton}
         >
           Go to Products
