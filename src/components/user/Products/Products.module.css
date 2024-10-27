@@ -1,5 +1,5 @@
 .featuredProducts {
-    padding: 20px 100px;
+    padding:  80px;
     background-color: #fff;
   }
   
@@ -55,7 +55,7 @@
   .seeAll {
     font-size: 20px;
     display: block;
-    margin-top: 20px;
+    margin-top: 50px;
     text-align: center;
     font-weight: bold;
     color: #634C9F; /* Or any color you prefer */

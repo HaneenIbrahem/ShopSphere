@@ -29,7 +29,7 @@ export default function Products() {
 
   return (
     <section className={styles.featuredProducts}>
-      <h2>Popular Products</h2>
+      {/* <h2>Popular Products</h2> */}
       <div className={styles.productsGrid}>
         {loading ? (
           <Loader /> // Show Loader component when loading
