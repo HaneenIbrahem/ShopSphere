@@ -6,6 +6,7 @@
     background-color: #e5ddec; /* Light lavender background */
     padding: 20px 140px;
     border-radius: 10px;
+    flex-wrap: wrap;
   }
   
   .textContainer {
@@ -79,3 +80,72 @@
     border-radius: 10px;
   }
   
+  /* Responsive adjustments */
+@media (max-width: 768px) {
+  .heroContainer {
+    padding: 20px 40px; /* Reduce padding on smaller screens */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items */
+    justify-content: center;
+  }
+
+  .textContainer {
+      max-width: 100%;
+      margin-bottom: 20px;
+      text-align: center;
+  }
+
+  .imageContainer {
+      max-width: 100%;
+      text-align: center;
+  }
+
+  .imageContainer img {
+      width: 100%;
+  }
+
+  h1 {
+      font-size: 2rem;
+  }
+
+  .priceContainer {
+    justify-content: center;
+  }
+
+  .shopButton {
+      font-size: 0.9rem;
+      padding: 8px 16px;
+  }
+
+  .newPrice, .oldPrice {
+      font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroContainer {
+      padding: 20px;
+      justify-content: center;
+  }
+
+  h1 {
+      font-size: 1.5rem;
+  }
+
+  .shopButton {
+      font-size: 0.8rem;
+      padding: 6px 12px;
+  }
+
+  p, .limitedOffer, .discountLabel {
+      font-size: 0.8rem;
+  }
+
+  .newPrice {
+      font-size: 1.1rem;
+  }
+
+  .oldPrice {
+      font-size: 0.9rem;
+  }
+}

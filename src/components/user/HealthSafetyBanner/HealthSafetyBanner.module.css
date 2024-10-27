@@ -5,6 +5,7 @@
     background-color: #FCEDE5; /* Light background color similar to your example */
     padding: 20px 100px;
     border-radius: 10px;
+    flex-wrap: wrap;
   }
   
   .textContent {
@@ -27,3 +28,47 @@
     height: auto; /* Adjust image size */
   }
   
+  /* Responsive adjustments */
+@media (max-width: 768px) {
+    .banner {
+        padding: 20px 40px; /* Reduce padding on smaller screens */
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items */
+    }
+
+    .textContent {
+        margin-right: 0; /* Remove margin for vertical layout */
+        text-align: center; /* Center text */
+    }
+
+    .textContent h2 {
+        font-size: 18px; /* Reduce font size */
+    }
+
+    .textContent p {
+        font-size: 12px; /* Reduce font size */
+    }
+
+    .imageContent img {
+        width: 100%; /* Make image responsive */
+        max-width: 400px; /* Optional: cap maximum width */
+    }
+}
+
+@media (max-width: 480px) {
+    .banner {
+        padding: 20px 20px; /* Further reduce padding */
+    }
+
+    .textContent h2 {
+        font-size: 16px; /* Further reduce font size */
+    }
+
+    .textContent p {
+        font-size: 10px; /* Further reduce font size */
+    }
+
+    .imageContent img {
+        max-width: 100%; /* Ensure image takes full width */
+    }
+}
