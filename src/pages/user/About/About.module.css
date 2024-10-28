@@ -1,105 +1,97 @@
 .aboutPage {
-    padding: 140px;
-    max-width: 1200px;
-    margin: 0 auto;
-    font-family: Arial, sans-serif;
-  }
-  
-  .heroSection {
-    text-align: center;
-    margin-bottom: 50px;
-  }
-  
-  .heroSection h1 {
-    font-size: 40px;
-    color: #634C9F;
-  }
-  
-  .heroSection p {
-    font-size: 18px;
-    color: #666;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .aboutSection,
-  .missionSection {
-    margin-bottom: 50px;
-  }
-  
-  .aboutSection h2,
-  .missionSection h2,
-  .teamSection h2,
-  .testimonialsSection h2 {
-    font-size: 28px;
-    color: #333;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .aboutSection p,
-  .missionSection p {
-    font-size: 18px;
-    color: #555;
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  
-  .teamSection {
-    margin-bottom: 50px;
-  }
-  
-  .teamContainer {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    margin-top: 30px;
-  }
-  
-  .teamMember {
-    text-align: center;
-    flex: 1;
-  }
-  
-  .teamImage {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-  
-  .teamMember h3 {
-    font-size: 20px;
-    color: #333;
-    margin-top: 10px;
-  }
-  
-  .teamMember p {
-    font-size: 16px;
-    color: #777;
-  }
-  
-  .testimonialsSection {
-    text-align: center;
-    margin-bottom: 50px;
-  }
-  
-  .testimonial {
-    background-color: #f9f9f9;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    font-style: italic;
-    color: #333;
-    max-width: 700px;
-    margin: 20px auto;
-  }
-  
-  .testimonial span {
-    display: block;
-    margin-top: 10px;
-    font-size: 16px;
-    color: #634C9F;
-  }
-  
+  max-width: 1200px; /* Limit max width for larger screens */
+  margin: 0 auto; /* Center the page */
+  padding: 100px;
+  font-family: 'Arial', sans-serif; /* Use a clean, modern font */
+  color: #333; /* Default text color */
+}
+
+.heroSection {
+  background-color: #eae0f5; /* Light background */
+  padding: 40px;
+  text-align: center; /* Center align text */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.heroSection h1 {
+  font-size: 2.5rem; /* Large heading */
+  color: #3b0e70; /* Dark purple */
+  margin-bottom: 10px;
+}
+
+.heroSection p {
+  font-size: 1.2rem; /* Slightly larger paragraph text */
+  line-height: 1.6; /* Improve readability */
+}
+
+.aboutSection, .missionSection, .teamSection, .testimonialsSection {
+  margin: 40px 0; /* Space between sections */
+  padding: 20px;
+  background-color: #fff; /* White background for contrast */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.aboutSection h2, .missionSection h2, .teamSection h2, .testimonialsSection h2 {
+  font-size: 2rem; /* Consistent heading size */
+  color: #3b0e70; /* Dark purple for headings */
+  margin-bottom: 15px;
+  border-bottom: 2px solid #e47911; /* Underline effect */
+  padding-bottom: 10px;
+}
+
+.aboutSection p, .missionSection p {
+  font-size: 1rem; /* Regular paragraph size */
+  line-height: 1.6; /* Improved readability */
+  margin: 10px 0;
+}
+
+.teamContainer {
+  display: flex; /* Flexbox for team member layout */
+  justify-content: space-between; /* Space out team members */
+  flex-wrap: wrap; /* Allow wrapping */
+}
+
+.teamMember {
+  flex: 1 1 calc(33% - 20px); /* 3 items per row with margin */
+  margin: 10px; /* Space between items */
+  text-align: center; /* Center align text */
+  padding: 15px; /* Padding for content */
+  background-color: #f9f9f9; /* Light background for members */
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow */
+  transition: transform 0.3s; /* Smooth transition effect */
+}
+
+.teamMember:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+}
+
+.teamImage {
+  width: 80%; /* Responsive image size */
+  border-radius: 50%; /* Circular image */
+  margin-bottom: 10px; /* Space below image */
+}
+
+.testimonialsSection {
+  background-color: #eae0f5; /* Light background */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.testimonial {
+  margin-bottom: 20px; /* Space between testimonials */
+  padding: 10px; /* Padding around testimonial */
+  border-left: 4px solid #e47911; /* Accent line */
+}
+
+.testimonial p {
+  font-style: italic; /* Italicize testimonial text */
+}
+
+.testimonial span {
+  display: block; /* Block for name */
+  text-align: right; /* Align name to the right */
+  color: #888; /* Lighter color for name */
+}

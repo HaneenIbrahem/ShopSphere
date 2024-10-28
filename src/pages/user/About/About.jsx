@@ -38,7 +38,7 @@ const About = () => {
             <p>CEO & Founder</p>
           </div>
           <div className={styles.teamMember}>
-            <img src="src/assets/imgs/team2.jpg" alt="Team Member 2" className={styles.teamImage} />
+            <img src="src/assets/imgs/team7.jpg" alt="Team Member 2" className={styles.teamImage} />
             <h3>Jane Smith</h3>
             <p>Head of Marketing</p>
           </div>

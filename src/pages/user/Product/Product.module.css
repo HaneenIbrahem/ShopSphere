@@ -146,3 +146,131 @@
   .shareButton:hover{
     background-color: #e2e9ef;
   }
+
+  .addReviewButton {
+    background-color: #634C9F; /* Main color of the project */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .addReviewButton:hover {
+    background-color: #523a82; /* Darker shade on hover */
+  }
+  
+  /* Modal container */
+.reviewForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Title */
+.reviewForm h3 {
+  font-size: 1.5rem;
+  color: #333;
+  text-align: center;
+}
+
+/* Textarea styling */
+.reviewTextarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: none;
+  font-size: 1rem;
+  color: #555;
+  min-height: 120px;
+  transition: border-color 0.3s ease;
+}
+
+.reviewTextarea:focus {
+  border-color: #634C9F; /* Main color from ShopSphere */
+  outline: none;
+}
+
+/* Rating section styling */
+.ratingSection {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+.ratingSelect {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  color: #555;
+  transition: border-color 0.3s ease;
+}
+
+.ratingSelect:focus {
+  border-color: #634C9F;
+  outline: none;
+}
+
+/* Submit button styling */
+.submitReviewButton {
+  background-color: #634C9F;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submitReviewButton:hover {
+  background-color: #513c80;
+}
+
+.submitReviewButton:focus {
+  outline: 2px solid #3e2b6b;
+}
+/* Rating section styling */
+.ratingSection {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Star container */
+.starRating {
+  display: flex;
+  gap: 0.3rem;
+  cursor: pointer;
+}
+
+/* Active star (filled) */
+.activeStar {
+  color: #FFD700; /* Gold color for active stars */
+  transition: color 0.2s ease;
+}
+
+/* Inactive star (unfilled) */
+.inactiveStar {
+  color: #ddd; /* Light color for inactive stars */
+  transition: color 0.2s ease;
+}
+
+.starRating:hover .inactiveStar {
+  color: #ffeb99; /* Light yellow on hover */
+}

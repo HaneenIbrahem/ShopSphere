@@ -1,25 +1,64 @@
-import axios from 'axios';
-import React, {useContext , useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import Loader from '../../../components/user/Loader/Loader'; // Import the Loader component
-import styles from './Product.module.css'; // Import the CSS module for styling
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import Loader from "../../../components/user/Loader/Loader"; // Import the Loader component
+import styles from "./Product.module.css"; // Import the CSS module for styling
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import Modal from "../../../components/user/Modal/Modal";
+import { FaStar } from "react-icons/fa";
 
 export default function Product() {
   const [product, setProduct] = useState({});
   const [productImages, setProductImages] = useState([]);
-  const [mainImage, setMainImage] = useState('');
+  const [mainImage, setMainImage] = useState("");
   const [loading, setLoading] = useState(true);
-  const [showFullDescription, setShowFullDescription] = useState(false); 
+  const [showFullDescription, setShowFullDescription] = useState(false);
   const [comment, setComment] = useState(""); // New state for comment
-  const [rating, setRating] = useState(1); // New state for rating (default to 1)
+  const [rating, setRating] = useState(0); // New state for rating (default to 1)
   const { productId } = useParams();
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
-  console.log(`productId ${productId}`)
+  const [showReviewModal, setShowReviewModal] = useState(false);
 
-  
+  const offerEndDate = new Date("2024-11-15T23:59:59"); // Adjust this date to match your offer end date
+
+  const handleAddReviewClick = () => {
+    setShowReviewModal(true);
+  };
+
+  const closeReviewModal = () => {
+    setShowReviewModal(false);
+  };
+
+  useEffect(() => {
+    // Countdown calculation function
+    const calculateTimeLeft = () => {
+      const now = new Date();
+      const difference = offerEndDate - now;
+
+      if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((difference / (1000 * 60)) % 60);
+        const seconds = Math.floor((difference / 1000) % 60);
+        setTimeLeft({ days, hours, minutes, seconds });
+      } else {
+        // Clear the timer if the offer has ended
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      }
+    };
+
+    const timer = setInterval(calculateTimeLeft, 1000);
+
+    // Clean up the interval on component unmount
+    return () => clearInterval(timer);
+  }, [offerEndDate]);
 
   const handleAddReview = async () => {
     if (!comment.trim()) {
@@ -36,7 +75,7 @@ export default function Product() {
 
     try {
       const ordersResponse = await axios.get(
-        'https://ecommerce-node4.onrender.com/order', // API to get the user's orders
+        "https://ecommerce-node4.onrender.com/order", // API to get the user's orders
         {
           headers: {
             Authorization: `Tariq__${authToken}`, // Ensure the token is properly attached
@@ -44,51 +83,57 @@ export default function Product() {
         }
       );
       // Check if the product exists in any of the user's orders
-    const userOrders = ordersResponse.data.orders; // Assuming the API returns an array of orders
-    console.log(userOrders)
-    // const hasOrderedProduct = userOrders.some(order =>
-    //   order.products.some(product => product.id === productId),
-    //   console.log(`product.id ${product.id}`)
-    // );
+      const userOrders = ordersResponse.data.orders; // Assuming the API returns an array of orders
+      console.log(userOrders);
+      // const hasOrderedProduct = userOrders.some(order =>
+      //   order.products.some(product => product.id === productId),
+      //   console.log(`product.id ${product.id}`)
+      // );
 
-    const hasOrderedProduct = userOrders.some(order =>
-      order.products.some(p => {
-        const productIdValue = p.productId._id; 
-        console.log("Product object:", p); 
-        console.log(`Comparing product ID: ${productIdValue} with productId: ${productId}`);
-        return productIdValue === productId; 
-      })
-    );
+      const hasOrderedProduct = userOrders.some((order) =>
+        order.products.some((p) => {
+          const productIdValue = p.productId._id;
+          console.log("Product object:", p);
+          console.log(
+            `Comparing product ID: ${productIdValue} with productId: ${productId}`
+          );
+          return productIdValue === productId;
+        })
+      );
 
-    if (!hasOrderedProduct) {
-      toast.error("You can only review products you have ordered", { autoClose: 1500 });
-      return;
-    }
-
-    // Step 2: Submit the review if the product was ordered
-    const reviewResponse = await axios.post(
-      `https://ecommerce-node4.onrender.com/products/${productId}/review`,
-      {
-        comment: comment,
-        rating: rating,
-      },
-      {
-        headers: {
-          Authorization: `Tariq__${authToken}`, 
-        },
+      if (!hasOrderedProduct) {
+        toast.error("You can only review products you have ordered", {
+          autoClose: 1500,
+        });
+        return;
       }
-    );
 
-    if (reviewResponse.status === 200 || reviewResponse.status === 201) {
-      toast.success("Review submitted successfully!", { autoClose: 1500 });
-      setComment(""); // Clear the comment field after submission
-      setRating(1); // Reset rating
-    } else {
-      console.error(`Failed to submit review, status: ${reviewResponse.status}`);
+      // Step 2: Submit the review if the product was ordered
+      const reviewResponse = await axios.post(
+        `https://ecommerce-node4.onrender.com/products/${productId}/review`,
+        {
+          comment: comment,
+          rating: rating,
+        },
+        {
+          headers: {
+            Authorization: `Tariq__${authToken}`,
+          },
+        }
+      );
+
+      if (reviewResponse.status === 200 || reviewResponse.status === 201) {
+        toast.success("Review submitted successfully!", { autoClose: 1500 });
+        setComment(""); // Clear the comment field after submission
+        setRating(1); // Reset rating
+      } else {
+        console.error(
+          `Failed to submit review, status: ${reviewResponse.status}`
+        );
+      }
+    } catch (error) {
+      console.error("Error verifying order or submitting review:", error);
     }
-  } catch (error) {
-    console.error("Error verifying order or submitting review:", error);
-  }
 
     // try {
     //   const response = await axios.post(
@@ -99,7 +144,7 @@ export default function Product() {
     //     },
     //     {
     //       headers: {
-    //         Authorization: `Tariq__${localStorage.getItem("authToken")}`, 
+    //         Authorization: `Tariq__${localStorage.getItem("authToken")}`,
     //       },
     //     }
     //   );
@@ -119,47 +164,48 @@ export default function Product() {
   const handleAddToCart = async () => {
     const authToken = localStorage.getItem("authToken");
 
-  if (!authToken) {
-    console.error("User is not authenticated");
-    return;
-  }
-
-  if (!product || !product.id) {
-    console.error("Invalid product or product ID");
-    return;
-  }
-
-  try {
-    const response = await axios.post(
-      "https://ecommerce-node4.onrender.com/cart",
-      { productId: product.id },
-      {
-        headers: {
-          Authorization: `Tariq__${authToken}`, // Ensure authToken format is correct
-        },
-      }
-    );
-
-    // Check for both 200 and 201 status codes
-    if (response.status === 200 || response.status === 201) {
-      toast.success("Item added successful!", { autoClose: 1500 });
-      const existingCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-
-  
-
-      // Add the new item to the cart
-      existingCartItems.push(product);
-
-      // Save the updated cart items back to local storage
-      localStorage.setItem("cartItems", JSON.stringify(existingCartItems));
-
-      window.dispatchEvent(new Event("storage"));
-    } else {
-      console.error(`Failed to add product to cart, status: ${response.status}`);
+    if (!authToken) {
+      console.error("User is not authenticated");
+      return;
     }
-  } catch (error) {
-    console.error("Error adding product to cart:", error);
-  }
+
+    if (!product || !product.id) {
+      console.error("Invalid product or product ID");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "https://ecommerce-node4.onrender.com/cart",
+        { productId: product.id },
+        {
+          headers: {
+            Authorization: `Tariq__${authToken}`, // Ensure authToken format is correct
+          },
+        }
+      );
+
+      // Check for both 200 and 201 status codes
+      if (response.status === 200 || response.status === 201) {
+        toast.success("Item added successful!", { autoClose: 1500 });
+        const existingCartItems =
+          JSON.parse(localStorage.getItem("cartItems")) || [];
+
+        // Add the new item to the cart
+        existingCartItems.push(product);
+
+        // Save the updated cart items back to local storage
+        localStorage.setItem("cartItems", JSON.stringify(existingCartItems));
+
+        window.dispatchEvent(new Event("storage"));
+      } else {
+        console.error(
+          `Failed to add product to cart, status: ${response.status}`
+        );
+      }
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+    }
   };
 
   const getProducts = async () => {
@@ -193,7 +239,7 @@ export default function Product() {
 
   const truncatedDescription =
     product.description && product.description.length > 200
-      ? product.description.slice(0, product.description.length / 2) + '...'
+      ? product.description.slice(0, product.description.length / 2) + "..."
       : product.description;
 
   return (
@@ -243,14 +289,17 @@ export default function Product() {
             {showFullDescription ? product.description : truncatedDescription}
           </p>
           <button onClick={toggleDescription} className={styles.toggleButton}>
-            {showFullDescription ? 'See Less' : 'See More'}
+            {showFullDescription ? "See Less" : "See More"}
           </button>
 
           {product.discount > 0 && (
             <div className={styles.countdownTimer}>
               <span>Special Offer Ends In:</span>
               <div className={styles.timerBoxes}>
-                <span>81</span>:<span>06</span>:<span>50</span>:<span>02</span>
+                <span>{timeLeft.days.toString().padStart(2, "0")}</span>:
+                <span>{timeLeft.hours.toString().padStart(2, "0")}</span>:
+                <span>{timeLeft.minutes.toString().padStart(2, "0")}</span>:
+                <span>{timeLeft.seconds.toString().padStart(2, "0")}</span>
               </div>
             </div>
           )}
@@ -263,10 +312,15 @@ export default function Product() {
           </div> */}
 
           <div className={styles.actionButtons}>
-            <button onClick={handleAddToCart} className={styles.addToCartButton}>Add to Cart</button>
+            <button
+              onClick={handleAddToCart}
+              className={styles.addToCartButton}
+            >
+              Add to Cart
+            </button>
             {/* <button className={styles.buyNowButton}>Buy Now</button> */}
             <button className={styles.shareButton}>Share</button>
-            </div>
+          </div>
 
           {/* <div className={styles.extraButtons}>
             <button className={styles.wishlistButton}>Add to Wishlist</button>
@@ -275,7 +329,7 @@ export default function Product() {
           </div> */}
 
           {/* Review Form */}
-        <div className={styles.reviewSection}>
+          {/* <div className={styles.reviewSection}>
           <h3>Leave a Review</h3>
           <textarea
             value={comment}
@@ -301,7 +355,50 @@ export default function Product() {
           <button onClick={handleAddReview} className={styles.submitReviewButton}>
             Submit Review
           </button>
-        </div>
+        </div> */}
+          <button
+            onClick={handleAddReviewClick}
+            className={styles.addReviewButton}
+          >
+            Add a Review
+          </button>
+
+          {showReviewModal && (
+            <Modal onClose={closeReviewModal}>
+              <div className={styles.reviewForm}>
+                <h3>Leave a Review</h3>
+                <textarea
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  placeholder="Leave your comment here"
+                  className={styles.reviewTextarea}
+                />
+                <div className={styles.ratingSection}>
+                  <label>Rating:</label>
+                  <div className={styles.starRating}>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <FaStar
+                        key={star}
+                        size={24}
+                        onClick={() => setRating(star)} // Set rating on click
+                        className={
+                          star <= rating
+                            ? styles.activeStar
+                            : styles.inactiveStar
+                        }
+                      />
+                    ))}
+                  </div>
+                </div>
+                <button
+                  onClick={handleAddReview}
+                  className={styles.submitReviewButton}
+                >
+                  Submit Review
+                </button>
+              </div>
+            </Modal>
+          )}
         </div>
       </div>
     </section>

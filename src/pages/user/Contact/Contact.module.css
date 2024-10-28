@@ -1,91 +1,116 @@
 .contactPage {
-    padding: 140px;
-    max-width: 1200px;
-    margin: 0 auto;
-    font-family: Arial, sans-serif;
-  }
-  
-  .headerSection {
-    text-align: center;
-    margin-bottom: 50px;
-  }
-  
-  .headerSection h1 {
-    font-size: 36px;
-    color: #333;
-  }
-  
-  .headerSection p {
-    font-size: 18px;
-    color: #666;
-  }
-  
-  .officesSection {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 40px;
-  }
-  
-  .office {
-    text-align: left;
-    width: 45%;
-  }
-  
-  .office h3 {
-    font-size: 20px;
-    color: #634C9F;
-  }
-  
-  .office p {
-    font-size: 16px;
-    color: #333;
-  }
-  
-  .formSection {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  
-  .inputRow {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  
-  .inputGroup {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  
-  .inputField {
-    width: 85%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-  }
-  
-  .textArea {
-    width: 100%;
-    height: 150px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-  }
-  
-  .error {
-    color: red;
-    font-size: 14px;
-    margin-top: 5px;
-  }
-  
-  .submitButton {
-    background-color: #634C9F;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-  }
+  margin: 0 auto; 
+  padding:100px 200px; 
+  font-family: 'Arial', sans-serif; 
+  color: #333; 
+}
+
+.headerSection {
+  text-align: center; 
+  margin-bottom: 40px; 
+}
+
+.headerSection h1 {
+  font-size: 2.5rem; 
+  color: #3b0e70; 
+  margin-bottom: 10px;
+}
+
+.headerSection p {
+  font-size: 1.2rem; 
+  line-height: 1.6; 
+  max-width: 800px; 
+  margin: 0 auto; 
+}
+
+.officesSection {
+  display: flex; 
+  justify-content: space-between; 
+  margin-bottom: 40px; 
+}
+
+.office {
+  background-color: #f9f9f9;
+  border-radius: 10px; 
+  padding: 20px; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+  flex: 1;
+  margin: 0 10px; 
+  transition: transform 0.3s; 
+}
+
+.office:hover {
+  transform: translateY(-5px); 
+}
+
+.office h3 {
+  color: #3b0e70; 
+  margin-bottom: 10px; 
+}
+
+.formSection {
+  background-color: #fff; 
+  border-radius: 10px; 
+  padding: 40px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+}
+
+.inputRow {
+  display: flex; 
+  justify-content: space-between; 
+  margin-bottom: 20px; 
+}
+
+.inputGroup {
+  flex: 1; 
+  margin-right: 20px; 
+}
+
+.inputGroup:last-child {
+  margin-right: 0; 
+}
+
+.inputField, .textArea {
+  width: 100%; 
+  padding: 15px; 
+  border: 1px solid #ccc; 
+  border-radius: 5px; 
+  font-size: 1rem; 
+  transition: border 0.3s; 
+}
+
+.inputField:focus, .textArea:focus {
+  border-color: #3b0e70; 
+  outline: none; 
+}
+
+.textArea {
+  height: 150px; 
+  resize: none; 
+}
+
+.error {
+  color: red; 
+  font-size: 0.9rem; 
+  margin-top: 5px; 
+}
+
+.submitButton {
+  background-color: #3b0e70; 
+  color: white; 
+  padding: 15px 30px; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  font-size: 1rem; 
+  transition: background-color 0.3s; 
+}
+
+.submitButton:hover {
+  background-color: #e47911; 
+}
+
+.submitButton:disabled {
+  background-color: #ccc; 
+  cursor: not-allowed; 
+}

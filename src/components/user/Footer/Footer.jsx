@@ -19,7 +19,7 @@ const Footer = () => {
           </div>
           <small>
             By subscribing, you agree to our <a href="#">Terms & Conditions</a>{" "}
-            and <a href="#">Privacy & Cookies Policy</a>.
+              and  <a href="#"> Privacy & Cookies Policy</a>.
           </small>
         </div>
       </div>
